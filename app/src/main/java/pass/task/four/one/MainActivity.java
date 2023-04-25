@@ -1,5 +1,6 @@
 package pass.task.four.one;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //Get and Set
         workoutDuration = Integer.parseInt(etWorkoutDuration.getText().toString()) * 1000;
         restDuration = Integer.parseInt(etRestDuration.getText().toString()) * 1000;
-        btnStart.setVisibility(btnStart.INVISIBLE);
+        initializeUI();
         startRestTimer();
 
     }
@@ -130,7 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void resetUI(){
         goStopView.setEnabled(false);
-        myLayout.setBackgroundColor(Color.WHITE);
+        timeRemaining.setVisibility(timeRemaining.INVISIBLE);
+        goStopView.setVisibility(goStopView.INVISIBLE);
+        myLayout.setBackgroundResource(R.drawable.background_image);
         etWorkoutDuration.setEnabled(true);
         etWorkoutDuration.setVisibility(etWorkoutDuration.VISIBLE);
         etRestDuration.setEnabled(true);
@@ -139,9 +142,12 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setProgress(0);
         etRestDuration.setText("");
         etWorkoutDuration.setText("");
+        progressBar.setVisibility(progressBar.INVISIBLE);
         btnStop.setVisibility(btnStop.INVISIBLE);
     }
     private void initializeUI(){
+        timeRemaining.setVisibility(timeRemaining.VISIBLE);
+        goStopView.setVisibility(goStopView.VISIBLE);
         etWorkoutDuration.setEnabled(false);
         etWorkoutDuration.setVisibility(etWorkoutDuration.INVISIBLE);
         etRestDuration.setEnabled(false);
@@ -151,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         goStopView.setEnabled(true);
         goStopView.setText("GO!");
         myLayout.setBackgroundColor(Color.GREEN);
+        progressBar.setVisibility(progressBar.VISIBLE);
         progressBar.setMax(workoutDuration);
     }
 

@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_image"
     tools:context=".MainActivity">
 
     <TextView
@@ -17,6 +18,7 @@
         android:textAlignment="center"
         android:textColor="#FDFDFD"
         android:textSize="96sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,6 +33,7 @@
         android:background="#FFFDFD"
         android:indeterminate="false"
         android:max="100"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/et_workout_duration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -41,6 +44,7 @@
         android:id="@+id/et_workout_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
         android:hint="@string/workout_time"
         android:minHeight="48dp"
         android:textAlignment="center"
@@ -54,6 +58,7 @@
         android:id="@+id/et_rest_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
         android:hint="@string/rest_time"
         android:minHeight="48dp"
         android:textAlignment="center"
@@ -97,6 +102,7 @@
         android:textAlignment="center"
         android:textColor="#FDFDFD"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
