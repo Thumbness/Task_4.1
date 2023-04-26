@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        //Get and Set
+        // Gets and sets user input workout and rest times, initializes the views and begins the workout starting at the Rest state.
         workoutDuration = Integer.parseInt(etWorkoutDuration.getText().toString()) * 1000;
         restDuration = Integer.parseInt(etRestDuration.getText().toString()) * 1000;
         initializeUI();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stopTimer() {
-        // If stop timer button pressed, stop either workout or rest countdowns
+        // If stop timer button pressed, stop either workout or rest countdowns and reset the UI to the 'landing' page
         if (workoutTimer != null) {
             workoutTimer.cancel();
         }
@@ -70,21 +70,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startWorkoutTimer( ) {
-        // Set state to workout and set max progress bar to user set workout seconds
+        // Set state to workout and initialize UI
         isWorkoutPhase = true;
         initializeUI();
-        vibrate();
         workoutTimer = new CountDownTimer(workoutDuration, 1000) {
-            //Update textView every second
+            //Update UI every second
             @Override
             public void onTick(long millisUntilFinished) {
                 updateUI(millisUntilFinished);
             }
 
-            // When countdown ends, start the rest timer
+            // When countdown ends, start the rest timer and vibrate
             @Override
             public void onFinish() {
-                // Play sound or vibrate device here
+                vibrate();
                 startRestTimer();
             }
         };
@@ -97,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
         goStopView.setText("REST!");
         myLayout.setBackgroundColor(Color.GRAY);
         progressBar.setMax(restDuration);
-        vibrate();
+
         restTimer = new CountDownTimer(restDuration, 1000) {
+            // Same as workout timer, update UI every seconds
             @Override
             public void onTick(long millisUntilFinished) {
                 updateUI(millisUntilFinished);
@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                // Play sound or vibrate device here
+                // Start workout counter again and vibrate
+                vibrate();
                 startWorkoutTimer();
             }
         };
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(long millisUntilFinished) {
-        // Set seconds
+        // Set minutes and seconds remaining
         int seconds = (int) (millisUntilFinished / 1000);
         int minutes = seconds / 60;
         seconds = seconds % 60;
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetUI(){
+        // Set all views to initial starting state
         goStopView.setEnabled(false);
         timeRemaining.setVisibility(timeRemaining.INVISIBLE);
         goStopView.setVisibility(goStopView.INVISIBLE);
@@ -146,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         btnStop.setVisibility(btnStop.INVISIBLE);
     }
     private void initializeUI(){
+        // Set all views to running app state
         timeRemaining.setVisibility(timeRemaining.VISIBLE);
         goStopView.setVisibility(goStopView.VISIBLE);
         etWorkoutDuration.setEnabled(false);
